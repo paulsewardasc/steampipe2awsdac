@@ -1,52 +1,12 @@
-# Prerequisites
-*.d
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+# Exclude all other files
+*
 
-# Linker output
-*.ilk
-*.map
-*.exp
+# Re-include .sh, .py and .sql files
+!*.sh
+!*.py
+!*.sql
 
-# Precompiled Headers
-*.gch
-*.pch
+# Exclude files starting with "private"
+private*
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
