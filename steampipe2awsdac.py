@@ -2,21 +2,27 @@ import csv
 import json
 import sys
 import re
+import os
+
+def getfname(filename,ftype):
+  base_directory = '.'
+  base = os.path.abspath(base_directory)
+  fname = os.path.abspath(os.path.join(base_directory, f'{filename}-{ftype}.csv'))
+  fname = os.path.normpath(os.path.join(base_directory, fname))
+  if fname.startswith(base):
+    return(fname)
+  else:
+    print('[-] An attempt to circumvent secruity has been made, exiting...')
+    sys.exit()
 
 def process_csv(filename):
-    """
-    Reads a CSV file and generates a hierarchical output of AWS resources.
-
-    Args:
-        filename (str): The name of the CSV file.
-    """
-
     data = {}
     data_alb = {}
     subnet = {}
     ec2 = {}
 
-    with open(f'{filename}-main.csv', 'r') as file:
+    fname = getfname(filename,'main')
+    with open(fname, 'r') as file:
         reader = csv.DictReader(file)
         for row in reader:
             instance_id = row['instance_id']
@@ -50,7 +56,8 @@ def process_csv(filename):
 
     # Read in ALB file for reference
     try:
-      with open(f'{filename}-alb.csv', 'r') as file:
+      fname = getfname(filename,'alb')
+      with open(fname, 'r') as file:
         reader = csv.DictReader(file)
         for row in reader:
           region = row['region']
@@ -71,7 +78,8 @@ def process_csv(filename):
 
     # Read in RDS file for reference
     try:
-      with open(f'{filename}-rds.csv', 'r') as file:
+      fname = getfname(filename,'rds')
+      with open(fname, 'r') as file:
         reader = csv.DictReader(file)
         for row in reader:
           region = row['region']
@@ -93,7 +101,8 @@ def process_csv(filename):
 
     # Read in S3 file for reference
     try:
-      with open(f'{filename}-s3.csv', 'r') as file:
+      fname = getfname(filename,'s3')
+      with open(fname, 'r') as file:
         reader = csv.DictReader(file)
         for row in reader:
           region = row['region']
@@ -116,7 +125,8 @@ def process_csv(filename):
     # Read in ALB Links
     links = {}
     try:
-      with open(f'{filename}-alb-links.csv', 'r') as file:
+      fname = getfname(filename,'alb-links')
+      with open(fname, 'r') as file:
         reader = csv.DictReader(file)
         for row in reader:
           source = row['alb_title']
