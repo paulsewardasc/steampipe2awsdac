@@ -15,8 +15,9 @@ echo """
 """
 while IFS= read -r line; do
   title=$(echo $line | perl -pe "s{.png}{}")
-  echo "<P>$title</P>"
-  echo "<img src=\"$line\">"
+  echo "<a href=\"$line\">$title</a></P>"
+  echo "<img src=\"$line\" width="100%">"
+  echo "</hr></p>"
 done <<< "$files"
 echo "</body></html>"
 
